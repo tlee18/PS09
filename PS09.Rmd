@@ -1,6 +1,6 @@
 ---
 title: "STAT/MATH 495: Problem Set 09"
-author: "WRITE YOUR NAME(S) HERE"
+author: "Tim Lee"
 date: "2017-11-07"
 output:
   html_document:
@@ -25,7 +25,7 @@ library(tidyverse)
 
 # Collaboration
 
-Please indicate who you collaborated with on this assignment: 
+Please indicate who you collaborated with on this assignment: Pei Gong, Vickie Ip
 
 
 
@@ -37,7 +37,8 @@ observations_2 <- read_csv("data/observations_2.csv")
 
 # Set observations to be one of two datasets
 observations <- observations_2
-
+# n <- 0
+# n <- n+1
 # Fit model for k=2
 k <- 2
 k_means_results <- kmeans(observations, centers=k)
@@ -55,7 +56,8 @@ cluster_centers <- cluster_centers %>%
 
 ggplot(NULL, aes(x=x1, y=x2, col=cluster)) +
   geom_point(data=observations) +
-  geom_point(data=cluster_centers, size=5)
+  geom_point(data=cluster_centers, size=5) 
+# + labs(title = paste0("observations_2 ", n))
 ```
 
 **Questions**:
@@ -64,17 +66,20 @@ ggplot(NULL, aes(x=x1, y=x2, col=cluster)) +
 results.
 1. Speculate on the root cause of any consistency or inconsistency in the
 results.
-1. Run KMC 10 times on `observations_2` and comment on the consistentcy of the
+1. Run KMC 10 times on `observations_2` and comment on the consistency of the
 results.
 1. Speculate on the root cause of any consistency or inconsistency in the
 results.
 
 **Answers**:
 
-1.
-1.
-1.
-1.
+1. For the `observations_1` dataset, the colors change and so do the location of the cluster centers. 
+
+1. The inconsistency in the color is due to the random starting point of the cluster centroids. The inconsistency in the cluster locations is due to the lack of clear clusters. Since the data points are not naturally forming clusters, the fitted model is more dependent on the random starting point and not a clear signal of a relationship. 
+
+1. For the `observations_2` dataset, the colors change though the cluster centers stay in the same place. When I ran KMC 10 times, the "red" cluster appeared in the top-right 5 times, whereas the "blue" cluster appeared in the top-right about 5 times. The color seemed random. 
+
+1. The inconsistency in the color is due to the random placement of the centroids in the beginning the k-means clustering algorithm, which will affect the starting color. The consistency of the cluster centroid locations is due to the clusters being distinct. There are two groups that have strong with-in group similarity and strong between-group distinctness.
 
 
 
